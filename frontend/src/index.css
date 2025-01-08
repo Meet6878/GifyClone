@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer utilities{
+    .gradient{
+        @apply bg-gradient-to-r from-blue-500 to-purple-500 text-white;
+    }
+}
