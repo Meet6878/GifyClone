@@ -6,7 +6,7 @@ import useGetAllGiphys from "../hooks/useGetAllGiphys";
 import { useSelector } from "react-redux";
 import GifSearch from "./GifSearch";
 const Hearder = () => {
-  const silecter = useSelector((state) => state.giphy.gifs);
+  // const silecter = useSelector((state) => state.giphy.gifs);
 
   const [category, setCategory] = useState([]);
   const [showCategory, setShowCategory] = useState(false);
@@ -25,7 +25,7 @@ const Hearder = () => {
     fetchGifCategory();
   }, []);
 
-  console.log("ye category he", category);
+  // console.log("ye category he", category);
   return (
     <>
       <nav>

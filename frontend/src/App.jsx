@@ -8,6 +8,10 @@ import Favourite from './pages/favourite'
 import Search from './pages/Search'
 import GifPage from './pages/GifPage'
 import ErrorPage from './pages/ErrorPage'
+import BGchange from './components/BGchange'
+import PasswordGenrater from './components/PasswordGenrater'
+import PasswordGenerator from './components/PasswordGenrater'
+import Prec from './components/Prec'
 
 
   //home page
@@ -40,6 +44,14 @@ import ErrorPage from './pages/ErrorPage'
         {
           path:"/favourite",
           element:<Favourite />
+        },
+        {
+          path:"/bgchange",
+          element:<BGchange />
+        },
+        {
+          path:"/genratepassword",
+          element:<Prec />
         }
 
       ]
