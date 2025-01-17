@@ -16,7 +16,8 @@ const Prec = () => {
 if(allowNumber) str += number;
 if(allowSpecial) str += symbol;
     for (let i = 0; i < inputlength; i++) {
-      password += str.charAt(Math.random() * str.length );
+      password += str.charAt(Math.floor( Math.random() * str.length) );
+     
     }
     setText(password);
     console.log("str",str);
