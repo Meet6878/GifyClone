@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState ,useRef} from "react";
 
 const Prec = () => {
   const [inputlength, setInputLength] = useState(4);
@@ -6,12 +6,15 @@ const Prec = () => {
   const [allowNumber, setIsAllowNumber] = useState(false);
   const [allowSpecial, setallowSpecial] = useState(false);
 
+  const passRef = useRef(null);
+
   const generatePassword = useCallback(()=>{
     let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     let number = "0123456789";
     let symbol = "!@#$%^&*()-_=+[]{}|;:,.<>/?";
     let password = "";
 
+  
     
 if(allowNumber) str += number;
 if(allowSpecial) str += symbol;
@@ -21,13 +24,16 @@ if(allowSpecial) str += symbol;
   }
 
     setText(password);
-    console.log("str",str);
-    console.log("pass",password);
-  },[inputlength,allowNumber,allowSpecial]);
+    // console.log("str",str);
+    // console.log("pass",password);
+  },[inputlength,allowNumber,allowSpecial,setText]);
 
   const handleCopie = async()=>{
     try {
-const res = await navigator.clipboard.writeText(text);
+      await passRef.current?.select();
+      // console.log("cppy ki yare",cppy);
+      await window.navigator.clipboard.writeText(text);
+// const res = await navigator.clipboard.writeText(text);
   
     } catch (error) {
       console.log("error",error);
@@ -37,6 +43,8 @@ const res = await navigator.clipboard.writeText(text);
   useEffect(()=>{
     generatePassword();
   },[generatePassword])
+
+  // console.log("ref ",passRef.current.value);
  
   return (
     <div className="min-h-screen bg-gray-900 flex items-center justify-center">
@@ -46,6 +54,7 @@ const res = await navigator.clipboard.writeText(text);
         </h2>
         <div className="mb-4">
           <input
+          ref={passRef}
             type="text"
             readOnly
             value={text}
