@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 const Prec = () => {
   const [inputlength, setInputLength] = useState(4);
@@ -6,7 +6,7 @@ const Prec = () => {
   const [allowNumber, setIsAllowNumber] = useState(false);
   const [allowSpecial, setallowSpecial] = useState(false);
 
-  const generatePassword = () => {
+  const generatePassword = useCallback(()=>{
     let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     let number = "0123456789";
     let symbol = "!@#$%^&*()-_=+[]{}|;:,.<>/?";
@@ -22,10 +22,20 @@ if(allowSpecial) str += symbol;
     setText(password);
     console.log("str",str);
     console.log("pass",password);
-  };
+  },[inputlength,allowNumber,allowSpecial]);
+
+  const handleCopie = async()=>{
+    try {
+const res = await navigator.clipboard.writeText(text);
+  
+    } catch (error) {
+      console.log("error",error);
+    }
+  }
+
   useEffect(()=>{
     generatePassword();
-  },[inputlength,allowNumber,allowSpecial])
+  },[generatePassword])
  
   return (
     <div className="min-h-screen bg-gray-900 flex items-center justify-center">
@@ -40,7 +50,7 @@ if(allowSpecial) str += symbol;
             value={text}
             className="w-full p-2 rounded bg-gray-700 text-white outline-none mb-2"
           />
-          <button className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded">
+          <button className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded" onClick={handleCopie}>
             Copy Password
           </button>
         </div>
